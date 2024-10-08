@@ -73,7 +73,7 @@ $(function() {
   <div class="headertitle"><div class="title">Load reference datasets for SingleR </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md__2github_2workspace_2README"></a> <img src="https://github.com/singler-inc/singlepp_loaders/actions/workflows/run-tests.yaml/badge.svg" alt="Unit tests" style="pointer-events: none;" class="inline"/> <img src="https://github.com/singler-inc/singlepp_loaders/actions/workflows/doxygenate.yaml/badge.svg" alt="Documentation" style="pointer-events: none;" class="inline"/> <a href="https://codecov.io/gh/singler-inc/singlepp_loaders"><img src="https://codecov.io/gh/singler-inc/singlepp_loaders/branch/master/graph/badge.svg?token=OYTGM9IRSE" alt="codecov" style="pointer-events: none;" class="inline"/></a></p>
+<div class="textblock"><p><a class="anchor" id="md__2github_2workspace_2README"></a> <img src="https://github.com/singler-inc/singlepp_loaders/actions/workflows/run-tests.yaml/badge.svg" alt="Unit tests" style="pointer-events: none;" class="inline"/> <img src="https://github.com/singler-inc/singlepp_loaders/actions/workflows/doxygenate.yaml/badge.svg" alt="Documentation" style="pointer-events: none;" class="inline"/> <a href="https://codecov.io/gh/singler-inc/singlepp_loaders"><img src="https://codecov.io/gh/singler-inc/singlepp_loaders/branch/master/graph/badge.svg?token=Dv89atBILO" alt="codecov" style="pointer-events: none;" class="inline"/></a></p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Overview</h1>
 <p>This repository implements functions to load <a href="https://github.com/SingleR-inc/singlepp"><b>singlepp</b></a> reference datasets for use in cell type annotation. Each reference dataset is pre-processed into a custom format that eliminates the need for ranking and marker detection. The aim is to avoid unnecessary work on underpowered client devices, e.g., for more responsive web applications. Briefly, a reference dataset is represented by three files corresponding to the following components:</p>
@@ -101,7 +101,7 @@ Quick start</h1>
 <div class="line"> </div>
 <div class="line">singlepp_loader::LoadMarkersOptions mopt;</div>
 <div class="line"><span class="keyword">auto</span> markers = singlepp_loader::load_markers_from_gzip_file(</div>
-<div class="line">    <span class="stringliteral">&quot;some_rankings.csv.gz&quot;</span>,</div>
+<div class="line">    <span class="stringliteral">&quot;some_markers.csv.gz&quot;</span>,</div>
 <div class="line">    mopt</div>
 <div class="line">);</div>
 <div class="line"> </div>
