@@ -2,7 +2,7 @@
 
 ![Unit tests](https://github.com/singler-inc/singlepp_loaders/actions/workflows/run-tests.yaml/badge.svg)
 ![Documentation](https://github.com/singler-inc/singlepp_loaders/actions/workflows/doxygenate.yaml/badge.svg)
-[![codecov](https://codecov.io/gh/singler-inc/singlepp_loaders/branch/master/graph/badge.svg?token=OYTGM9IRSE)](https://codecov.io/gh/singler-inc/singlepp_loaders)
+[![codecov](https://codecov.io/gh/singler-inc/singlepp_loaders/branch/master/graph/badge.svg?token=Dv89atBILO)](https://codecov.io/gh/singler-inc/singlepp_loaders)
 
 ## Overview
 
@@ -42,7 +42,7 @@ auto ranks = singlepp_loader::load_rankings_from_text_file(
 
 singlepp_loader::LoadMarkersOptions mopt;
 auto markers = singlepp_loader::load_markers_from_gzip_file(
-    "some_rankings.csv.gz",
+    "some_markers.csv.gz",
     mopt
 );
 
@@ -63,7 +63,7 @@ More details can be found in the [**singlepp** documentation](https://SingleR-in
 
 If you're using CMake, you just need to add something like this to your `CMakeLists.txt`:
 
-```
+```cmake
 include(FetchContent)
 
 FetchContent_Declare(
@@ -77,7 +77,7 @@ FetchContent_MakeAvailable(singlepp_loaders)
 
 Then you can link to **singlepp_loaders** to make the headers available during compilation:
 
-```
+```cmake
 # For executables:
 target_link_libraries(myexe singlepp_loaders)
 
