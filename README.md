@@ -50,7 +50,7 @@ singlepp_loader::LoadLabelsOptions lopt;
 auto labels = singlepp_loader::load_labels_from_zlib_buffer(
     buffer_ptr,
     buffer_length,
-    mopt
+    lopt
 );
 ```
 

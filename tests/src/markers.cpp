@@ -61,7 +61,7 @@ TEST_P(LoadMarkersTest, TextFile) {
     options.buffer_size = std::get<0>(params);
     options.parallel = std::get<1>(params);
 
-    auto reloaded = singlepp_loaders::load_markers_from_text_file(path.c_str(), nfeatures, nlabels, options);
+    auto reloaded = singlepp_loaders::load_markers_from_text_file(path.c_str(), options);
     compare_markers(markers, reloaded);
 }
 
@@ -103,12 +103,12 @@ TEST_P(LoadMarkersTest, GzipFile) {
     options.buffer_size = std::get<0>(params);
     options.parallel = std::get<1>(params);
 
-    auto reloaded = singlepp_loaders::load_markers_from_gzip_file(path.c_str(), nfeatures, nlabels, options);
+    auto reloaded = singlepp_loaders::load_markers_from_gzip_file(path.c_str(), options);
     compare_markers(markers, reloaded);
 
     std::ifstream in(path, std::ios::binary);
     std::vector<unsigned char> buffer(std::istreambuf_iterator<char>(in), {});
-    auto reloaded2 = singlepp_loaders::load_markers_from_zlib_buffer(buffer.data(), buffer.size(), nfeatures, nlabels, options);
+    auto reloaded2 = singlepp_loaders::load_markers_from_zlib_buffer(buffer.data(), buffer.size(), options);
     compare_markers(markers, reloaded2);
 }
 
@@ -121,10 +121,10 @@ INSTANTIATE_TEST_SUITE_P(
     )
 );
 
-static void quick_marker_err(std::string path, size_t nf, size_t nl, std::string msg) {
+static void quick_marker_err(std::string path, std::string msg) {
     EXPECT_ANY_THROW({
         try {
-            singlepp_loaders::load_markers_from_text_file(path.c_str(), nf, nl, singlepp_loaders::LoadMarkersOptions());
+            singlepp_loaders::load_markers_from_text_file(path.c_str(), singlepp_loaders::LoadMarkersOptions());
         } catch (std::exception& e) {
             EXPECT_TRUE(std::string(e.what()).find(msg) != std::string::npos);
             throw;
@@ -136,56 +136,38 @@ static void quick_marker_err(std::string path, size_t nf, size_t nl, std::string
 TEST(LoadMarkers, EdgeCases) {
     {
         auto path = byteme::temp_file_path("mark_err");
-        quick_dump(path, "1\t2\t1000\n");
-        quick_marker_err(path, 1, 3, "gene index out of range");
-    }
-
-    {
-        auto path = byteme::temp_file_path("mark_err");
-        quick_dump(path, "5\t1\t2\n");
-        quick_marker_err(path, 5, 3, "label index out of range");
-    }
-
-    {
-        auto path = byteme::temp_file_path("mark_err");
-        quick_dump(path, "1\t5\t2\n");
-        quick_marker_err(path, 5, 3, "label index out of range");
-    }
-
-    {
-        auto path = byteme::temp_file_path("mark_err");
         quick_dump(path, "1\t1\t\n");
-        quick_marker_err(path, 5, 3, "not be empty");
+        quick_marker_err(path, "not be empty");
     }
 
     {
         auto path = byteme::temp_file_path("mark_err");
         quick_dump(path, "1\t1\t\t1\n");
-        quick_marker_err(path, 5, 3, "not be empty");
+        quick_marker_err(path, "not be empty");
     }
 
     {
         auto path = byteme::temp_file_path("mark_err");
         quick_dump(path, "1\t1\n");
-        quick_marker_err(path, 5, 3, "at least three tab-separated fields");
+        quick_marker_err(path, "at least three tab-separated fields");
     }
 
     {
         auto path = byteme::temp_file_path("mark_err");
         quick_dump(path, "1\t1\t1\n1\t1\t1\n");
-        quick_marker_err(path, 5, 3, "multiple marker");
+        quick_marker_err(path, "multiple marker");
     }
 
     {
         auto path = byteme::temp_file_path("mark_err");
         quick_dump(path, "2\t1\t1\n1\t2\t1a\n");
-        quick_marker_err(path, 5, 3, "integer");
+        quick_marker_err(path, "integer");
     }
 
     {
         auto path = byteme::temp_file_path("mark_ok");
         quick_dump(path, "2\t1\t1\n1\t2\t0");
-        auto output = singlepp_loaders::load_markers_from_text_file(path.c_str(), 5, 3, singlepp_loaders::LoadMarkersOptions());
+        auto output = singlepp_loaders::load_markers_from_text_file(path.c_str(), singlepp_loaders::LoadMarkersOptions());
         EXPECT_EQ(output.size(), 3);
         EXPECT_EQ(output[1][2].size(), 1);
         EXPECT_EQ(output[1][2].front(), 0);
