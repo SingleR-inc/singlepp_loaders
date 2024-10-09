@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>singlepp_loaders: singlepp_loaders/singlepp_loaders.hpp File Reference</title>
+<title>singlepp_loaders: singlepp_loaders/verify.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -75,28 +75,35 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#namespaces">Namespaces</a>  </div>
-  <div class="headertitle"><div class="title">singlepp_loaders.hpp File Reference</div></div>
+<a href="#namespaces">Namespaces</a> &#124;
+<a href="#func-members">Functions</a>  </div>
+  <div class="headertitle"><div class="title">verify.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Umbrella header for the <b><a class="el" href="namespacesinglepp__loaders.html" title="Load pre-processed single reference datasets.">singlepp_loaders</a></b> library.  
+<p>Verify the integrity of the loaded components.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="rankings_8hpp_source.html">rankings.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="markers_8hpp_source.html">markers.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="labels_8hpp_source.html">labels.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="verify_8hpp_source.html">verify.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="elRef" href="https://singler-inc.github.io/singlepp/singlepp_8hpp.html">singlepp/singlepp.hpp</a>&quot;</code><br />
+<code>#include &lt;stdexcept&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
 </div>
-<p><a href="singlepp__loaders_8hpp_source.html">Go to the source code of this file.</a></p>
+<p><a href="verify_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespacesinglepp__loaders" id="r_namespacesinglepp__loaders"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacesinglepp__loaders.html">singlepp_loaders</a></td></tr>
 <tr class="memdesc:namespacesinglepp__loaders"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load pre-processed <b>single</b> reference datasets. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:ac70ef4d9cabad2e3f452c40b50e7f30f" id="r_ac70ef4d9cabad2e3f452c40b50e7f30f"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">typename</a> <a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">Value_</a> , <a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">typename</a> <a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">Index_</a> , <a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">typename</a> <a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">Rank_</a> , <a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">typename</a> <a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">Label_</a> &gt; </td></tr>
+<tr class="memitem:ac70ef4d9cabad2e3f452c40b50e7f30f"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">void</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespacesinglepp__loaders.html#ac70ef4d9cabad2e3f452c40b50e7f30f">singlepp_loaders::verify</a> (<a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">const</a> <a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">RankMatrix</a>&lt; <a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">Value_</a>, <a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">Index_</a>, <a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">Rank_</a> &gt; &amp;<a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">rankings</a>, <a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">const</a> std::vector&lt; <a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">Label_</a> &gt; &amp;<a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">labels</a>, <a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">const</a> <a class="elRef" href="https://singler-inc.github.io/singlepp/namespacesinglepp.html#a87e4be0939142d883ad98944e6336a5c">singlepp::Markers</a>&lt; <a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">Index_</a> &gt; &amp;<a class="el" href="namespacesinglepp__loaders.html#a128454a38edec4d080e5af3d12420231">markers</a>)</td></tr>
+<tr class="separator:ac70ef4d9cabad2e3f452c40b50e7f30f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Umbrella header for the <b><a class="el" href="namespacesinglepp__loaders.html" title="Load pre-processed single reference datasets.">singlepp_loaders</a></b> library. </p>
+<div class="textblock"><p>Verify the integrity of the loaded components. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

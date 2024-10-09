@@ -28,6 +28,14 @@
     <includes id="rankings_8hpp" name="rankings.hpp" local="yes" import="no" module="no" objc="no">rankings.hpp</includes>
     <includes id="markers_8hpp" name="markers.hpp" local="yes" import="no" module="no" objc="no">markers.hpp</includes>
     <includes id="labels_8hpp" name="labels.hpp" local="yes" import="no" module="no" objc="no">labels.hpp</includes>
+    <includes id="verify_8hpp" name="verify.hpp" local="yes" import="no" module="no" objc="no">verify.hpp</includes>
+    <namespace>singlepp_loaders</namespace>
+  </compound>
+  <compound kind="file">
+    <name>verify.hpp</name>
+    <path>singlepp_loaders/</path>
+    <filename>verify_8hpp.html</filename>
+    <includes id="rankings_8hpp" name="rankings.hpp" local="yes" import="no" module="no" objc="no">rankings.hpp</includes>
     <namespace>singlepp_loaders</namespace>
   </compound>
   <compound kind="struct">
@@ -91,10 +99,10 @@
     <class kind="struct">singlepp_loaders::LoadMarkersOptions</class>
     <class kind="struct">singlepp_loaders::LoadRankingsOptions</class>
     <member kind="typedef">
-      <type>tatami::DenseMatrix&lt; Value_, Index_, std::vector&lt; int &gt; &gt;</type>
+      <type>tatami::DenseMatrix&lt; Value_, Index_, std::vector&lt; Rank_ &gt; &gt;</type>
       <name>RankMatrix</name>
       <anchorfile>namespacesinglepp__loaders.html</anchorfile>
-      <anchor>ae04cb54a22a8eddbe878ae88e75e9efd</anchor>
+      <anchor>a128454a38edec4d080e5af3d12420231</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -122,22 +130,22 @@
       <type>singlepp::Markers&lt; Index_ &gt;</type>
       <name>load_markers_from_text_file</name>
       <anchorfile>namespacesinglepp__loaders.html</anchorfile>
-      <anchor>abc59dc55b860b4cb5d479651d075476d</anchor>
-      <arglist>(const char *path, size_t nfeatures, size_t nlabels, const LoadMarkersOptions &amp;options)</arglist>
+      <anchor>afaa88ff4c4390b460027a7a811fd3829</anchor>
+      <arglist>(const char *path, const LoadMarkersOptions &amp;options)</arglist>
     </member>
     <member kind="function">
       <type>singlepp::Markers&lt; Index_ &gt;</type>
       <name>load_markers_from_gzip_file</name>
       <anchorfile>namespacesinglepp__loaders.html</anchorfile>
-      <anchor>ac03ee7b34618ef0add80a2a65109deae</anchor>
-      <arglist>(const char *path, size_t nfeatures, size_t nlabels, const LoadMarkersOptions &amp;options)</arglist>
+      <anchor>a4c08eabc84fe8b41646b09313612f245</anchor>
+      <arglist>(const char *path, const LoadMarkersOptions &amp;options)</arglist>
     </member>
     <member kind="function">
       <type>singlepp::Markers&lt; Index_ &gt;</type>
       <name>load_markers_from_zlib_buffer</name>
       <anchorfile>namespacesinglepp__loaders.html</anchorfile>
-      <anchor>ad8d6418bd0ae31d8e5e559fde9e37e2a</anchor>
-      <arglist>(const unsigned char *buffer, size_t len, size_t nfeatures, size_t nlabels, const LoadMarkersOptions &amp;options)</arglist>
+      <anchor>ab0df75fd4efe76ac466bf80619aab803</anchor>
+      <arglist>(const unsigned char *buffer, size_t len, const LoadMarkersOptions &amp;options)</arglist>
     </member>
     <member kind="function">
       <type>RankMatrix&lt; Value_, Index_ &gt;</type>
@@ -159,6 +167,13 @@
       <anchorfile>namespacesinglepp__loaders.html</anchorfile>
       <anchor>a28edb2b406ca5566cb078a60777a6f12</anchor>
       <arglist>(const unsigned char *buffer, size_t len, const LoadRankingsOptions &amp;options)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>verify</name>
+      <anchorfile>namespacesinglepp__loaders.html</anchorfile>
+      <anchor>ac70ef4d9cabad2e3f452c40b50e7f30f</anchor>
+      <arglist>(const RankMatrix&lt; Value_, Index_, Rank_ &gt; &amp;rankings, const std::vector&lt; Label_ &gt; &amp;labels, const singlepp::Markers&lt; Index_ &gt; &amp;markers)</arglist>
     </member>
   </compound>
   <compound kind="page">

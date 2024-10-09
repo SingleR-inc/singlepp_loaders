@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['wrap_5fshared_5fptr_0',['wrap_shared_ptr',['https://tatami-inc.github.io/tatami/namespacetatami.html#ab008bae4e33a408de29e9fc49d0f902c',1,'tatami']]]
+  ['verify_0',['verify',['../namespacesinglepp__loaders.html#ac70ef4d9cabad2e3f452c40b50e7f30f',1,'singlepp_loaders']]]
 ];

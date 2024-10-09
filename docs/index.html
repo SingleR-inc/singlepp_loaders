@@ -109,9 +109,11 @@ Quick start</h1>
 <div class="line"><span class="keyword">auto</span> labels = singlepp_loader::load_labels_from_zlib_buffer(</div>
 <div class="line">    buffer_ptr,</div>
 <div class="line">    buffer_length,</div>
-<div class="line">    mopt</div>
+<div class="line">    lopt</div>
 <div class="line">);</div>
-</div><!-- fragment --><p>These can be used in <code><a class="elRef" href="https://singler-inc.github.io/singlepp/namespacesinglepp.html#abcea821671f9339e4e933be2ed123c6e">singlepp::train_single()</a></code> to build a classifier that can be applied to a test dataset. More details can be found in the <a href="https://SingleR-inc.github.io/singlepp"><b>singlepp</b> documentation</a>.</p>
+</div><!-- fragment --><p>We can verify the consistency of all components with the <code>verify()</code> function:</p>
+<div class="fragment"><div class="line">singlepp_loader::verify(ranks, labels, markers);</div>
+</div><!-- fragment --><p>These components are used in <code><a class="elRef" href="https://singler-inc.github.io/singlepp/namespacesinglepp.html#abcea821671f9339e4e933be2ed123c6e">singlepp::train_single()</a></code> to build a classifier that can be applied to a test dataset. More details can be found in the <a href="https://SingleR-inc.github.io/singlepp"><b>singlepp</b> documentation</a>.</p>
 <h1><a class="anchor" id="autotoc_md3"></a>
 Building projects</h1>
 <h2><a class="anchor" id="autotoc_md4"></a>
