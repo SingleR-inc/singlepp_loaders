@@ -54,7 +54,13 @@ auto labels = singlepp_loader::load_labels_from_zlib_buffer(
 );
 ```
 
-These can be used in `singlepp::train_single()` to build a classifier that can be applied to a test dataset.
+We can verify the consistency of all components with the `verify()` function:
+
+```cpp
+singlepp_loader::verify(ranks, labels, markers);
+```
+
+These components are used in `singlepp::train_single()` to build a classifier that can be applied to a test dataset.
 More details can be found in the [**singlepp** documentation](https://SingleR-inc.github.io/singlepp).
 
 ## Building projects 

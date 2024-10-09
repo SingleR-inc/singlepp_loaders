@@ -27,11 +27,12 @@ namespace singlepp_loaders {
  * Each column corresponds to a sample while each row corresponds to a feature.
  * Each column contains the ranked expression values for all features.
  *
- * @tparam Data Numeric type for data in the matrix interface.
- * @tparam Index Integer type for indices in the matrix interface.
+ * @tparam Value_ Numeric type for data in the matrix interface.
+ * @tparam Index_ Integer type for indices in the matrix interface.
+ * @tparam Rank_ Integer type for the ranks being stored.
  */
-template<typename Value_ = double, typename Index_ = int>
-using RankMatrix = tatami::DenseMatrix<Value_, Index_, std::vector<int> >;
+template<typename Value_ = double, typename Index_ = int, typename Rank_ = int>
+using RankMatrix = tatami::DenseMatrix<Value_, Index_, std::vector<Rank_> >;
 
 /**
  * @brief Options for loading rankings.

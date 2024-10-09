@@ -13,6 +13,7 @@ add_executable(
     src/labels.cpp
     src/rankings.cpp
     src/markers.cpp
+    src/verify.cpp
 )
 
 target_link_libraries(libtest gtest_main singlepp_loaders)

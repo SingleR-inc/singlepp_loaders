@@ -4,6 +4,7 @@
 #include "rankings.hpp"
 #include "markers.hpp"
 #include "labels.hpp"
+#include "verify.hpp"
 
 /**
  * @file singlepp_loaders.hpp

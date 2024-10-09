@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 
 project(singlepp_loaders
-    VERSION 0.1.0
+    VERSION 0.1.1
     DESCRIPTION "Load pre-prepared reference datasets for SingleR"
     LANGUAGES CXX)
 
