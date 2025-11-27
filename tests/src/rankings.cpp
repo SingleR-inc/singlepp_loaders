@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "singlepp_loaders/rankings.hpp"
-#include "byteme/temp_file_path.hpp"
+#include "temp_file_path.h"
 #include "zlib.h"
 
 #include "utils.h"
@@ -26,7 +26,7 @@ static std::vector<int> extract_ranks(const singlepp_loaders::RankMatrix<int, in
 }
 
 TEST_P(LoadRankingsTest, TextFile) {
-    auto path = byteme::temp_file_path("rank_text");
+    auto path = temp_file_path("rank_text");
     size_t nfeat = 49, nprof = 13;
 
     auto params = GetParam();
@@ -63,7 +63,7 @@ TEST_P(LoadRankingsTest, TextFile) {
 }
 
 TEST_P(LoadRankingsTest, GzipFile) {
-    auto path = byteme::temp_file_path("rank_gzip");
+    auto path = temp_file_path("rank_gzip");
     size_t nfeat = 51, nprof = 17;
 
     auto params = GetParam();
@@ -129,44 +129,44 @@ static void quick_ranking_err(std::string path, std::string msg) {
 
 TEST(LoadRankings, EdgeCases) {
     {
-        auto path = byteme::temp_file_path("rank_err");
+        auto path = temp_file_path("rank_err");
         quick_dump(path, "a,v,b,d\n");
         quick_ranking_err(path, "integer ranks");
     }
 
     {
-        auto path = byteme::temp_file_path("rank_err");
+        auto path = temp_file_path("rank_err");
         quick_dump(path, "1,2,3,4\n1,2,3\n1,2,3,4\n");
         quick_ranking_err(path, "number of fields");
     }
 
     {
-        auto path = byteme::temp_file_path("rank_err");
+        auto path = temp_file_path("rank_err");
         quick_dump(path, "1,2,3,4\n1,2,3,\n1,2,3,4\n");
         quick_ranking_err(path, "not be empty");
     }
 
     {
-        auto path = byteme::temp_file_path("rank_err");
+        auto path = temp_file_path("rank_err");
         quick_dump(path, "1,2,3,4\n1,2,,4\n1,2,3,4\n");
         quick_ranking_err(path, "not be empty");
     }
 
     {
-        auto path = byteme::temp_file_path("rank_err");
+        auto path = temp_file_path("rank_err");
         quick_dump(path, "1,2,3,4\n1,2,3,4\n1,2,3\n");
         quick_ranking_err(path, "number of fields");
     }
 
     {
-        auto path = byteme::temp_file_path("rank_err");
+        auto path = temp_file_path("rank_err");
         quick_dump(path, "1,2,3,4\n1,2,3,4\n1,2,3,\n");
         quick_ranking_err(path, "not be empty");
     }
 
     // Non-newline termination is ok.
     {
-        auto path = byteme::temp_file_path("feat_ok");
+        auto path = temp_file_path("feat_ok");
         quick_dump(path, "1,2,3,4\n5,6,7,8");
         auto output = singlepp_loaders::load_rankings_from_text_file<int, int>(path.c_str(), singlepp_loaders::LoadRankingsOptions());
         std::vector<int> expected { 1,2,3,4,5,6,7,8 };

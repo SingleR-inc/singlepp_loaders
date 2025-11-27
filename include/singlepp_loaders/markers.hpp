@@ -42,10 +42,17 @@ struct LoadMarkersOptions {
  */
 namespace internal {
 
-template<typename Index_, bool parallel_>
-singlepp::Markers<Index_> load_markers(byteme::Reader& reader) {
+template<typename Index_>
+singlepp::Markers<Index_> load_markers(byteme::Reader& reader, bool parallel) {
     singlepp::Markers<Index_> markers;
-    typename std::conditional<parallel_, byteme::PerByte<char>, byteme::PerByteParallel<char> >::type pb(&reader);
+
+    std::unique_ptr<byteme::PerByteInterface<char> > pbptr;
+    if (parallel) {
+        pbptr.reset(new byteme::PerByteParallel<char, byteme::Reader*>(&reader));
+    } else {
+        pbptr.reset(new byteme::PerByteSerial<char, byteme::Reader*>(&reader));
+    }
+    auto& pb = *pbptr;
 
     bool okay = pb.valid();
     while (okay) {
@@ -142,15 +149,6 @@ singlepp::Markers<Index_> load_markers(byteme::Reader& reader) {
     return markers;
 }
 
-template<typename Index_>
-singlepp::Markers<Index_> load_markers(byteme::Reader& reader, bool parallel) {
-    if (parallel) {
-        return load_markers<Index_, true>(reader);
-    } else {
-        return load_markers<Index_, false>(reader);
-    }
-}
-
 }
 /** 
  * @endcond
@@ -172,7 +170,9 @@ singlepp::Markers<Index_> load_markers(byteme::Reader& reader, bool parallel) {
  */
 template<typename Index_ = singlepp::DefaultIndex>
 singlepp::Markers<Index_> load_markers_from_text_file(const char* path, const LoadMarkersOptions& options) {
-    byteme::RawFileReader reader(path, options.buffer_size);
+    byteme::RawFileReaderOptions read_opt;
+    read_opt.buffer_size = options.buffer_size;
+    byteme::RawFileReader reader(path, read_opt);
     return internal::load_markers<Index_>(reader, options.parallel);
 }
 
@@ -188,7 +188,9 @@ singlepp::Markers<Index_> load_markers_from_text_file(const char* path, const Lo
  */
 template<typename Index_ = singlepp::DefaultIndex>
 singlepp::Markers<Index_> load_markers_from_gzip_file(const char* path, const LoadMarkersOptions& options) {
-    byteme::GzipFileReader reader(path, options.buffer_size);
+    byteme::GzipFileReaderOptions read_opt;
+    read_opt.buffer_size = options.buffer_size;
+    byteme::GzipFileReader reader(path, read_opt);
     return internal::load_markers<Index_>(reader, options.parallel);
 }
 
@@ -205,7 +207,10 @@ singlepp::Markers<Index_> load_markers_from_gzip_file(const char* path, const Lo
  */
 template<typename Index_ = singlepp::DefaultIndex>
 singlepp::Markers<Index_> load_markers_from_zlib_buffer(const unsigned char* buffer, size_t len, const LoadMarkersOptions& options) {
-    byteme::ZlibBufferReader reader(buffer, len, 3, options.buffer_size);
+    byteme::ZlibBufferReaderOptions read_opt;
+    read_opt.mode = 3;
+    read_opt.buffer_size = options.buffer_size;
+    byteme::ZlibBufferReader reader(buffer, len, read_opt);
     return internal::load_markers<Index_>(reader, options.parallel);
 }
 

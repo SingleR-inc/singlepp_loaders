@@ -42,13 +42,20 @@ struct LoadLabelsOptions {
  */
 namespace internal {
 
-template<typename Label_, bool parallel_>
-std::vector<Label_> load_labels(byteme::Reader& reader) {
+template<typename Label_>
+std::vector<Label_> load_labels(byteme::Reader& reader, bool parallel) {
     bool non_empty = false;
     int current = 0;
     std::vector<Label_> labels;
 
-    typename std::conditional<parallel_, byteme::PerByte<char>, byteme::PerByteParallel<char> >::type pb(&reader);
+    std::unique_ptr<byteme::PerByteInterface<char> > pbptr;
+    if (parallel) {
+        pbptr.reset(new byteme::PerByteParallel<char, byteme::Reader*>(&reader));
+    } else {
+        pbptr.reset(new byteme::PerByteSerial<char, byteme::Reader*>(&reader));
+    }
+    auto& pb = *pbptr;
+
     bool okay = pb.valid();
     while (okay) {
         char x = pb.get();
@@ -77,15 +84,6 @@ std::vector<Label_> load_labels(byteme::Reader& reader) {
     return labels;
 }
 
-template<typename Label_>
-std::vector<Label_> load_labels(byteme::Reader& reader, bool parallel) {
-    if (parallel) {
-        return load_labels<Label_, true>(reader);
-    } else {
-        return load_labels<Label_, false>(reader);
-    }
-}
-
 }
 /** 
  * @endcond
@@ -106,7 +104,9 @@ std::vector<Label_> load_labels(byteme::Reader& reader, bool parallel) {
  */
 template<typename Label_ = singlepp::DefaultLabel>
 std::vector<Label_> load_labels_from_text_file(const char* path, const LoadLabelsOptions& options) {
-    byteme::RawFileReader reader(path, options.buffer_size);
+    byteme::RawFileReaderOptions read_opt;
+    read_opt.buffer_size = options.buffer_size;
+    byteme::RawFileReader reader(path, read_opt);
     return internal::load_labels<Label_>(reader, options.parallel);
 }
 
@@ -122,7 +122,9 @@ std::vector<Label_> load_labels_from_text_file(const char* path, const LoadLabel
  */
 template<typename Label_ = singlepp::DefaultLabel>
 std::vector<Label_> load_labels_from_gzip_file(const char* path, const LoadLabelsOptions& options) {
-    byteme::GzipFileReader reader(path, options.buffer_size);
+    byteme::GzipFileReaderOptions read_opt;
+    read_opt.buffer_size = options.buffer_size;
+    byteme::GzipFileReader reader(path, read_opt);
     return internal::load_labels<Label_>(reader, options.parallel);
 }
 
@@ -139,7 +141,10 @@ std::vector<Label_> load_labels_from_gzip_file(const char* path, const LoadLabel
  */
 template<typename Label_ = singlepp::DefaultLabel>
 std::vector<Label_> load_labels_from_zlib_buffer(const unsigned char* buffer, size_t len, const LoadLabelsOptions& options) {
-    byteme::ZlibBufferReader reader(buffer, len, 3, options.buffer_size);
+    byteme::ZlibBufferReaderOptions read_opt;
+    read_opt.mode = 3;
+    read_opt.buffer_size = options.buffer_size;
+    byteme::ZlibBufferReader reader(buffer, len, read_opt);
     return internal::load_labels<Label_>(reader, options.parallel);
 }
 

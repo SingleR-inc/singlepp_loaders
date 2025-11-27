@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 
 project(singlepp_loaders
-    VERSION 0.1.1
+    VERSION 0.2.0
     DESCRIPTION "Load pre-prepared reference datasets for SingleR"
     LANGUAGES CXX)
 
@@ -22,9 +22,9 @@ option(SINGLEPP_LOADERS_FETCH_EXTERN "Automatically fetch singlepp_loaders's ext
 if(SINGLEPP_LOADERS_FETCH_EXTERN)
     add_subdirectory(extern)
 else()
-    find_package(singler_singlepp 2.0.0 CONFIG REQUIRED)
-    find_package(tatami_tatami 3.0.0 CONFIG REQUIRED)
-    find_package(ltla_byteme 1.2.0 CONFIG REQUIRED)
+    find_package(singler_singlepp 3.0.0 CONFIG REQUIRED)
+    find_package(tatami_tatami 4.0.0 CONFIG REQUIRED)
+    find_package(ltla_byteme 2.0.0 CONFIG REQUIRED)
 endif()
 
 target_link_libraries(singlepp_loaders INTERFACE singler::singlepp tatami::tatami ltla::byteme)

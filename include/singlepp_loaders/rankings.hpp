@@ -55,8 +55,8 @@ struct LoadRankingsOptions {
  */
 namespace internal {
 
-template<typename Value_, typename Index_, bool parallel_>
-RankMatrix<Value_, Index_> load_rankings(byteme::Reader& reader) {
+template<typename Value_, typename Index_>
+RankMatrix<Value_, Index_> load_rankings(byteme::Reader& reader, bool parallel) {
     size_t nfeatures = 0;
     size_t line = 0;
     std::vector<int> values;
@@ -75,7 +75,14 @@ RankMatrix<Value_, Index_> load_rankings(byteme::Reader& reader) {
         }
     };
 
-    typename std::conditional<parallel_, byteme::PerByte<char>, byteme::PerByteParallel<char> >::type pb(&reader);
+    std::unique_ptr<byteme::PerByteInterface<char> > pbptr;
+    if (parallel) {
+        pbptr.reset(new byteme::PerByteParallel<char, byteme::Reader*>(&reader));
+    } else {
+        pbptr.reset(new byteme::PerByteSerial<char, byteme::Reader*>(&reader));
+    }
+    auto& pb = *pbptr;
+
     bool okay = pb.valid();
     while (okay) {
         char x = pb.get();
@@ -123,15 +130,6 @@ RankMatrix<Value_, Index_> load_rankings(byteme::Reader& reader) {
     return RankMatrix<Value_, Index_>(nfeatures, line, std::move(values), false);
 }
 
-template<typename Value_, typename Index_>
-RankMatrix<Value_, Index_> load_rankings(byteme::Reader& reader, bool parallel) {
-    if (parallel) {
-        return load_rankings<Value_, Index_, true>(reader);
-    } else {
-        return load_rankings<Value_, Index_, false>(reader);
-    }
-}
-
 }
 /** 
  * @endcond
@@ -154,7 +152,9 @@ RankMatrix<Value_, Index_> load_rankings(byteme::Reader& reader, bool parallel) 
  */
 template<typename Value_ = singlepp::DefaultValue, typename Index_ = singlepp::DefaultIndex>
 RankMatrix<Value_, Index_> load_rankings_from_text_file(const char* path, const LoadRankingsOptions& options) {
-    byteme::RawFileReader reader(path, options.buffer_size);
+    byteme::RawFileReaderOptions read_opt;
+    read_opt.buffer_size = options.buffer_size;
+    byteme::RawFileReader reader(path, read_opt);
     return internal::load_rankings<Value_, Index_>(reader, options.parallel);
 }
 
@@ -172,7 +172,9 @@ RankMatrix<Value_, Index_> load_rankings_from_text_file(const char* path, const 
  */
 template<typename Value_ = singlepp::DefaultValue, typename Index_ = singlepp::DefaultIndex>
 RankMatrix<Value_, Index_> load_rankings_from_gzip_file(const char* path, const LoadRankingsOptions& options) {
-    byteme::GzipFileReader reader(path, options.buffer_size);
+    byteme::GzipFileReaderOptions read_opt;
+    read_opt.buffer_size = options.buffer_size;
+    byteme::GzipFileReader reader(path, read_opt);
     return internal::load_rankings<Value_, Index_>(reader, options.parallel);
 }
 
@@ -191,7 +193,10 @@ RankMatrix<Value_, Index_> load_rankings_from_gzip_file(const char* path, const 
  */
 template<typename Value_ = singlepp::DefaultValue, typename Index_ = singlepp::DefaultIndex>
 RankMatrix<Value_, Index_> load_rankings_from_zlib_buffer(const unsigned char* buffer, size_t len, const LoadRankingsOptions& options) {
-    byteme::ZlibBufferReader reader(buffer, len, 3, options.buffer_size);
+    byteme::ZlibBufferReaderOptions read_opt;
+    read_opt.mode = 3;
+    read_opt.buffer_size = options.buffer_size;
+    byteme::ZlibBufferReader reader(buffer, len, read_opt);
     return internal::load_rankings<Value_, Index_>(reader, options.parallel);
 }
 

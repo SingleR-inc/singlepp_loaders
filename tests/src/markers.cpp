@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "singlepp_loaders/markers.hpp"
-#include "byteme/temp_file_path.hpp"
+#include "temp_file_path.h"
 #include "zlib.h"
 
 #include "utils.h"
@@ -28,7 +28,7 @@ protected:
 };
 
 TEST_P(LoadMarkersTest, TextFile) {
-    auto path = byteme::temp_file_path("mark_text");
+    auto path = temp_file_path("mark_text");
     auto params = GetParam();
 
     std::mt19937_64 rng(std::get<0>(params) + std::get<1>(params));
@@ -66,7 +66,7 @@ TEST_P(LoadMarkersTest, TextFile) {
 }
 
 TEST_P(LoadMarkersTest, GzipFile) {
-    auto path = byteme::temp_file_path("mark_text");
+    auto path = temp_file_path("mark_text");
     auto params = GetParam();
 
     std::mt19937_64 rng(std::get<0>(params) + std::get<1>(params));
@@ -135,37 +135,37 @@ static void quick_marker_err(std::string path, std::string msg) {
 
 TEST(LoadMarkers, EdgeCases) {
     {
-        auto path = byteme::temp_file_path("mark_err");
+        auto path = temp_file_path("mark_err");
         quick_dump(path, "1\t1\t\n");
         quick_marker_err(path, "not be empty");
     }
 
     {
-        auto path = byteme::temp_file_path("mark_err");
+        auto path = temp_file_path("mark_err");
         quick_dump(path, "1\t1\t\t1\n");
         quick_marker_err(path, "not be empty");
     }
 
     {
-        auto path = byteme::temp_file_path("mark_err");
+        auto path = temp_file_path("mark_err");
         quick_dump(path, "1\t1\n");
         quick_marker_err(path, "at least three tab-separated fields");
     }
 
     {
-        auto path = byteme::temp_file_path("mark_err");
+        auto path = temp_file_path("mark_err");
         quick_dump(path, "1\t1\t1\n1\t1\t1\n");
         quick_marker_err(path, "multiple marker");
     }
 
     {
-        auto path = byteme::temp_file_path("mark_err");
+        auto path = temp_file_path("mark_err");
         quick_dump(path, "2\t1\t1\n1\t2\t1a\n");
         quick_marker_err(path, "integer");
     }
 
     {
-        auto path = byteme::temp_file_path("mark_ok");
+        auto path = temp_file_path("mark_ok");
         quick_dump(path, "2\t1\t1\n1\t2\t0");
         auto output = singlepp_loaders::load_markers_from_text_file(path.c_str(), singlepp_loaders::LoadMarkersOptions());
         EXPECT_EQ(output.size(), 3);

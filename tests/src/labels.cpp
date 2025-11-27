@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "singlepp_loaders/labels.hpp"
-#include "byteme/temp_file_path.hpp"
+#include "temp_file_path.h"
 #include "zlib.h"
 
 #include "utils.h"
@@ -13,7 +13,7 @@
 class LoadLabelsTest : public ::testing::TestWithParam<std::tuple<int, bool> > {};
 
 TEST_P(LoadLabelsTest, TextFile) {
-    auto path = byteme::temp_file_path("lab_text");
+    auto path = temp_file_path("lab_text");
     std::vector<int> labels;
     {
         std::ofstream out(path, std::ofstream::out);
@@ -33,7 +33,7 @@ TEST_P(LoadLabelsTest, TextFile) {
 }
 
 TEST_P(LoadLabelsTest, GzipFile) {
-    auto path = byteme::temp_file_path("lab_gzip");
+    auto path = temp_file_path("lab_gzip");
     std::vector<int> labels;
     {
         std::string output;
@@ -84,20 +84,20 @@ void quick_label_err(std::string path, std::string msg) {
 
 TEST(LoadLabels, EdgeCases) {
     {
-        auto path = byteme::temp_file_path("label_err");
+        auto path = temp_file_path("label_err");
         quick_dump(path, "1\n2\n3a\n4\n");
         quick_label_err(path, "must be an integer");
     }
 
     {
-        auto path = byteme::temp_file_path("label_err");
+        auto path = temp_file_path("label_err");
         quick_dump(path, "1\n2\n\n4\n");
         quick_label_err(path, "must be an integer");
     }
 
     // Non-newline termination is ok, as are empty fields.
     {
-        auto path = byteme::temp_file_path("feat_ok");
+        auto path = temp_file_path("feat_ok");
         quick_dump(path, "1\n2");
         auto output = singlepp_loaders::load_labels_from_text_file(path.c_str(), singlepp_loaders::LoadLabelsOptions());
         EXPECT_EQ(output.size(), 2);
