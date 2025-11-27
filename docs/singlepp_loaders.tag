@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
-<tagfile doxygen_version="1.9.8">
+<tagfile doxygen_version="1.12.0">
   <compound kind="file">
     <name>labels.hpp</name>
     <path>singlepp_loaders/</path>
@@ -102,7 +102,7 @@
       <type>tatami::DenseMatrix&lt; Value_, Index_, std::vector&lt; Rank_ &gt; &gt;</type>
       <name>RankMatrix</name>
       <anchorfile>namespacesinglepp__loaders.html</anchorfile>
-      <anchor>a128454a38edec4d080e5af3d12420231</anchor>
+      <anchor>a86a99bb642f2fb27f09d177f50d4a0d3</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">

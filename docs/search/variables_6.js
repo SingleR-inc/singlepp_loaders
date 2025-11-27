@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['quantile_0',['quantile',['https://singler-inc.github.io/singlepp/structsinglepp_1_1ClassifyIntegratedOptions.html#a6d4d11059b19ca5066ceed0d9e36bf19',1,'singlepp::ClassifyIntegratedOptions::quantile'],['https://singler-inc.github.io/singlepp/structsinglepp_1_1ClassifySingleOptions.html#aebeadb5d5c853a7e2d0c6d9d7f611656',1,'singlepp::ClassifySingleOptions::quantile']]]
+  ['parallel_0',['parallel',['../structsinglepp__loaders_1_1LoadLabelsOptions.html#ad2b8deb7a0097822d072660d416906fb',1,'singlepp_loaders::LoadLabelsOptions::parallel'],['../structsinglepp__loaders_1_1LoadMarkersOptions.html#a68b230e7d2b1507b01e886eb6b140fec',1,'singlepp_loaders::LoadMarkersOptions::parallel'],['../structsinglepp__loaders_1_1LoadRankingsOptions.html#a234d454515da7bc046fc1107ee0ebb0e',1,'singlepp_loaders::LoadRankingsOptions::parallel']]],
+  ['pointers_1',['pointers',['https://tatami-inc.github.io/tatami/structtatami_1_1CompressedSparseContents.html#ad9410e8d3b32bc97086bebf2322c0ef8',1,'tatami::CompressedSparseContents']]]
 ];

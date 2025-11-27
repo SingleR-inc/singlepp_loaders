@@ -10,7 +10,13 @@ var searchData=
   ['compressedsparsecolumnmatrix_7',['CompressedSparseColumnMatrix',['https://tatami-inc.github.io/tatami/classtatami_1_1CompressedSparseColumnMatrix.html',1,'tatami']]],
   ['compressedsparsecontents_8',['CompressedSparseContents',['https://tatami-inc.github.io/tatami/structtatami_1_1CompressedSparseContents.html',1,'tatami']]],
   ['compressedsparsematrix_9',['CompressedSparseMatrix',['https://tatami-inc.github.io/tatami/classtatami_1_1CompressedSparseMatrix.html',1,'tatami']]],
-  ['compressedsparserowmatrix_10',['CompressedSparseRowMatrix',['https://tatami-inc.github.io/tatami/classtatami_1_1CompressedSparseRowMatrix.html',1,'tatami']]],
-  ['consecutiveoracle_11',['ConsecutiveOracle',['https://tatami-inc.github.io/tatami/classtatami_1_1ConsecutiveOracle.html',1,'tatami']]],
-  ['constantmatrix_12',['ConstantMatrix',['https://tatami-inc.github.io/tatami/classtatami_1_1ConstantMatrix.html',1,'tatami']]]
+  ['compressedsparsematrix_3c_20value_5f_2c_20index_5f_2c_20valuestorage_5f_2c_20indexstorage_5f_2c_20pointerstorage_5f_20_3e_10',['CompressedSparseMatrix&lt; Value_, Index_, ValueStorage_, IndexStorage_, PointerStorage_ &gt;',['https://tatami-inc.github.io/tatami/classtatami_1_1CompressedSparseMatrix.html',1,'tatami']]],
+  ['compressedsparsematrixoptions_11',['CompressedSparseMatrixOptions',['https://tatami-inc.github.io/tatami/structtatami_1_1CompressedSparseMatrixOptions.html',1,'tatami']]],
+  ['compressedsparserowmatrix_12',['CompressedSparseRowMatrix',['https://tatami-inc.github.io/tatami/classtatami_1_1CompressedSparseRowMatrix.html',1,'tatami']]],
+  ['consecutiveoracle_13',['ConsecutiveOracle',['https://tatami-inc.github.io/tatami/classtatami_1_1ConsecutiveOracle.html',1,'tatami']]],
+  ['constantmatrix_14',['ConstantMatrix',['https://tatami-inc.github.io/tatami/classtatami_1_1ConstantMatrix.html',1,'tatami']]],
+  ['converttocompressedsparseoptions_15',['ConvertToCompressedSparseOptions',['https://tatami-inc.github.io/tatami/structtatami_1_1ConvertToCompressedSparseOptions.html',1,'tatami']]],
+  ['converttodenseoptions_16',['ConvertToDenseOptions',['https://tatami-inc.github.io/tatami/structtatami_1_1ConvertToDenseOptions.html',1,'tatami']]],
+  ['converttofragmentedsparseoptions_17',['ConvertToFragmentedSparseOptions',['https://tatami-inc.github.io/tatami/structtatami_1_1ConvertToFragmentedSparseOptions.html',1,'tatami']]],
+  ['countcompressedsparsenonzerosoptions_18',['CountCompressedSparseNonZerosOptions',['https://tatami-inc.github.io/tatami/structtatami_1_1CountCompressedSparseNonZerosOptions.html',1,'tatami']]]
 ];
